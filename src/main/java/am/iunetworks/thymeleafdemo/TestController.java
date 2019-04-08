@@ -3,20 +3,27 @@ package am.iunetworks.thymeleafdemo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController("/")
 @RequestMapping
 public class TestController {
 
 
-    @GetMapping(value = "/test")
-    public String getTestPage() {
+    @GetMapping(value = "selsort")
+    public ModelAndView getTestPagsfe() {
 
-        return "test";
+        return  new ModelAndView("test");
     }
-    @GetMapping(value = "/welcome")
-    public String getWelcomePage() {
+    @GetMapping(value = "test")
+    public ModelAndView getTestPage() {
 
-        return "welcome";
+        return  new ModelAndView("test");
+    }
+    @GetMapping()
+    public ModelAndView getWelcomePage() {
+
+        return new ModelAndView("welcome");
     }
 }

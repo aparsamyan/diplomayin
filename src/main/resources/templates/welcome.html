@@ -2,13 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="welcomestyle.css" />
-<!--<script src="SelectionSort.js"></script>-->
+    <link rel="stylesheet" href="css/welcomeStyle.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
 </head>
 <body>
+<script>
+function showSelectionDiv() {
+   document.getElementById("SelectionDiv").style.display = "block";
+}
+</script>
+<div id="SelectionDiv" style="display: none;">
+    <div class='container'>
+        <p>Selection Sort: </p>
+        <ul class='line'>
+            <li data-block="3" class="block" data-width="">3</li>
+            <li data-block="2" class="block" data-width="">2</li>
+            <li data-block="1" class="block" data-width="">1</li>
+            <li data-block="4" class="block" data-width="">4</li>
+            <li data-block="6" class="block" data-width="">6</li>
+            <li data-block="5" class="block" data-width="">5</li>
+            <li data-block="8" class="block" data-width="">8</li>
+            <li data-block="7" class="block" data-width="">7</li>
+        </ul>
+        <br>
+        <button class='sSort bb'>Sort</button>
+    </div>
 
-<div class="account">
-  <!-- js-->
 </div>
 <div class="side-menu">
     <div class="menu-holder">
@@ -17,7 +37,7 @@
        </p></div>
     </div>
     <ul>
-        <li type="button" onclick="location.href = 'test'">Selection Sort</li>
+        <li type="button" onclick="showSelectionDiv()">Selection Sort</li>
         <li type="button" onclick="location.href = 'test'">Top Charts</li>
         <li type="button" onclick="location.href = 'test'">New Releases</li>
         <li type="button" onclick="location.href = 'test'" class="active">Music Library</li>
@@ -33,9 +53,10 @@
 <!--change color hover-->
     <h1>Music library</h1>
     <input id="input" type="text" placeholder="Search" class="header-input desktop-only" />
-
 </header>
-
 <div class="height"></div>
+
+<script src="js/Controller.js"></script>
+<script src="js/SelectionSort.js"></script>
 </body>
 </html>
