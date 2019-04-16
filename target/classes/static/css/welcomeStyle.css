@@ -1,4 +1,14 @@
-
+.testDiv {
+  border: 1px solid red;
+  height: 600px;
+  width: 1500px;
+  text-align: center;
+  align: center;
+  margin-left: 220px;
+  margin-top: 100px;
+  padding: 20px;
+  display: none;
+}
 
 :after {
     box-sizing: border-box;

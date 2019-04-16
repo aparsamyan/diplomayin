@@ -1,5 +1,8 @@
-<script>
-function showSelectionDiv() {
-   document.getElementById("SelectionDiv").style.display = "block";
+function showDiv() {
+  var x = document.getElementById("DivId");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
-</script>
