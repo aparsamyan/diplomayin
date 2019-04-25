@@ -11,11 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class TestController {
 
 
-    @GetMapping(value = "selsort")
-    public ModelAndView getTestPagsfe() {
-
-        return  new ModelAndView("test");
-    }
     @GetMapping(value = "test")
     public ModelAndView getTestPage() {
 
@@ -25,5 +20,10 @@ public class TestController {
     public ModelAndView getWelcomePage() {
 
         return new ModelAndView("welcome");
+    }
+    @GetMapping(value = "file")
+    public ModelAndView getWelcomePageslide() {
+
+        return new ModelAndView("file");
     }
 }

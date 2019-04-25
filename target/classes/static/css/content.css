@@ -1,0 +1,237 @@
+$main-font : 'Dosis', 'Helvetica Neue', helvetica, sans-serif;
+
+$core-gray: #5d5d5d;
+$core-blue: #369;
+
+$br: 8px;
+$global-width: 800px;
+
+%reset-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin boxshdow_btm($color: $core-gray, $p : 10%) {
+  box-shadow: inset 0 -4px 0 darken($color, $p);
+}
+
+@mixin transition($f: null, $d: 0.2, $t: ease) {
+  transition: $f $d#{'s'} $t;
+}
+
+%inline-list {
+  display: inline-block;
+  margin-right: 14px;
+}
+
+%padding {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+@mixin text-centered {
+  text-align: center;
+}
+
+.text-muted {
+  color: lighten($core-gray, 30%);
+}
+
+.text-center {
+  @include text-centered;
+}
+
+.page-wrap {
+  min-height: calc(100vh - 96px);
+}
+
+header,
+.content {
+  @extend %padding;
+  font-family: $main-font;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-400px);
+  }
+  to {
+   transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+header {
+  background-color: lighten($core-gray, 55%);
+  @include text-centered;
+  animation: slideDown .6s,
+             fadeIn .2s;
+  box-shadow: inset 0 -4px 0 lighten($core-gray, 50%);
+
+  nav {
+    @extend %padding;
+    ul {
+      @extend %reset-list;
+    }
+    li {
+      @extend %inline-list;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    a {
+      display: block;
+      font-size: 18px;
+      text-transform: uppercase;
+      color: $core-gray;
+      text-decoration: none;
+      padding-bottom: 3px;
+      border-bottom: 3px solid transparent;
+      @include transition;
+      &.active,
+      &:hover {
+        color: $core-blue;
+        border-color: lighten($core-blue, 5%);
+      }
+    }
+  }
+}
+
+.container {
+  max-width: $global-width;
+  margin: auto;
+}
+
+.content {
+  animation: fadeIn .35s;
+  margin-left: 15px;
+  margin-right: 15px;
+  a {
+    color: darkorange;
+  }
+  .content-block {
+    margin-bottom: 1.32em;
+    border-bottom: 1px solid lighten($core-gray, 60%);
+    opacity: .65;
+    transition: opacity .775s ease,
+                transform .275s ease-out;
+    &:hover {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+  }
+  .headln {
+    font-size: 42px;
+    text-transform: uppercase;
+    color: darken($core-gray, 30%);
+    margin-bottom: 42px;
+  }
+  .subheadln {
+    font-size: 20px;
+    margin-bottom: 14px;
+    margin-top: 32px;
+    text-transform: uppercase;
+    color: darken($core-gray, 15%);
+  }
+  .greeting {
+    padding: 12px 20px;
+    border: 1px solid $core-gray;
+    border-top-width: 3px;
+  }
+  .lead {
+    font-size: 1.42em;
+  }
+  .content-block:hover .readmore a {
+    visibility: visible;
+    opacity: 1;
+  }
+  .readmore a {
+    color: darkorange;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-bottom: .25em;
+    border-bottom: 1px solid transparent;
+    visibility: hidden;
+    opacity: 0;
+    transition: border .25s,
+                opacity .275s;
+    &:hover {
+      border-color: inherit;
+    }
+  }
+}
+
+fieldset {
+  margin: 10px 0;
+  padding: 5px 0 10px;
+  border: 0;
+}
+.form-ctrl,
+.form-label {
+  display: block;
+}
+.form-label {
+  font-weight: bold;
+  color: lighten($core-gray, 12%);
+  margin-bottom: .5em;
+}
+
+.form-ctrl {
+  border: 1px solid #ccc;
+  padding: 12px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.form-ctrl:focus {
+  border-color: $core-blue;
+}
+
+.form-ctrl.ng-dirty.ng-valid {
+  border-color: lightgreen;
+}
+.form-ctrl.ng-dirty.ng-invalid {
+  border-color: #BC1111;
+}
+
+.form-btn {
+  padding: 7px 12px;
+  appearance: none;
+  border: 1px solid $core-blue;
+  border-bottom: 3px solid darken($core-blue, 10%);
+  background-color: $core-blue;
+  color: #fff;
+  border-radius: 5px;
+  .disabled {
+    opacity: .75;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+footer {
+  font-family: $main-font;
+  font-size: 14px;
+  @extend %padding;
+  @include text-centered;
+  color: #fff;
+  border-top: 1px solid lighten($core-gray, 55%);
+  background-color: $core-gray;
+}

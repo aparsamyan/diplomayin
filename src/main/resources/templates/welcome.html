@@ -2,8 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/welcomeStyle.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/content.css" />
+    <link rel="stylesheet" href="css/secondDiv.css" />
+    <style type="text/css" media="screen">
+
+</style>
 </head>
 <body>
 <div class="side-menu">
@@ -14,7 +20,7 @@
     </div>
     <ul>
         <li type="button" onclick="showDiv()">Selection Sort</li>
-        <li type="button" onclick="location.href = 'test'">Top Charts</li>
+        <li type="button" onclick="location.href = 'file'">Top Charts</li>
         <li type="button" onclick="location.href = 'test'">New Releases</li>
         <li type="button" onclick="location.href = 'test'" class="active">Music Library</li>
         <li type="button" onclick="location.href = 'test'">Podcasts</li>
@@ -25,8 +31,26 @@
 
 </div>
 
-<div class="testDiv" id="DivId">
-test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>
+<div style="margin-left: 220px; margin-top: 100px; padding: 20px;border: 1px solid red; height: 100%; width: 900px;">
+    <button class="tablink" onclick="openPage('Tutorial', this, 'rgb(255,87,34)')" id="defaultOpen">Tutorial</button>
+    <button class="tablink" onclick="openPage('Vizualizer', this, 'rgb(255,87,34)')">Vizualizer</button>
+    <button class="tablink" onclick="openPage('About', this, 'rgb(255,87,34)')">About</button>
+
+    <div id="Tutorial" class="tabcontent">
+        <h3>News</h3>
+        <p>Some news this fine day!</p>
+    </div>
+
+    <div id="Vizualizer" class="tabcontent">
+        <h3>Contact</h3>
+        <p>Get in touch, or swing by for a cup of coffee.</p>
+    </div>
+
+    <div id="About" class="tabcontent">
+        <h3>About</h3>
+        <p>Who we are and what we do.</p>
+    </div>
+
 </div>
 
 <header>
@@ -35,6 +59,7 @@ test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>
     <input id="input" type="text" placeholder="Search" class="header-input desktop-only" />
 </header>
 <div class="height"></div>
-<script src="js/Controller.js"></script>
+
+<script src="js/HorizontalMenu.js"></script>
 </body>
 </html>
