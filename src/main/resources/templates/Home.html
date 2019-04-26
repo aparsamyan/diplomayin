@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+    <title>Title</title>
+    <style>
+*,
+:before,
+:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+body {
+    background: #F5F5F5;
+    font-family: "Roboto", "Helvetica", "sans-serif";
+}
+header {
+    display: flex;
+    flex-wrap: wrap;
+
+
+    align-items: center;
+    background: #FF5722;
+    color: #FFF;
+    z-index: 5;
+}
+button,
+input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: "Roboto", "Helvetica", "sans-serif";
+    -webkit-appearance: none;
+}
+.menu {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 12px;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+.mobile-only {
+    display: none;
+}
+.ripple {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    -webkit-transform: translateZ(0);
+}
+.ripple .rippling {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #FFF;
+    pointer-events: none;
+    opacity: .4;
+    transform: translate3d(-50%, -50%, 0);
+}
+header.shadow {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16);
+}
+header .menu {
+    background: url(http://cbwconline.com/IMG/Codepen/Menu.svg) center no-repeat;
+}
+header .menu:hover {
+    background-color: #f83c00;
+}
+header h1 {
+    font-weight: 400;
+    font-size: 20px;
+  padding-left: 15px;
+}
+header .header-input {
+    background: rgba(255, 255, 255, 0.3);
+    width: 50vw;
+    max-width: 800px;
+    height: 48px;
+    padding: 12px;
+    border-radius: 3px;
+    margin: 5px auto;
+    color: #FFF;
+    transition: .3s, width .01s;
+}
+header .header-input:focus,
+header .header-input:active {
+    background: #FFF;
+    color: #000;
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.1);
+}
+header .search-btn {
+    width: 36px;
+    height: 36px;
+    background: url(http://cbwconline.com/IMG/Codepen/Search-White.svg) center no-repeat;
+    border-radius: 50%;
+}
+header .search-btn.close {
+    background: url(http://cbwconline.com/IMG/Codepen/Close-White.svg) center no-repeat;
+}
+header .search-btn {
+    margin-left: auto;
+}
+.mobile-search {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #EEE;
+    transition: transform .3s;
+    transform: translateY(100%);
+    z-index: 200;
+}
+.ios-web-app .mobile-search {
+    border-top: 20px solid #d0d0d0;
+}
+.mobile-search.searching {
+    transform: translateY(0);
+}
+.mobile-search-hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: .4s
+}
+.mobile-search-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.mobile-search .mobile-search-header {
+    background: #fff;
+    height: 64px;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+}
+.mobile-search .mobile-search-header .mobile-search-back {
+    width: 58px;
+    height: 58px;
+    margin-left: 10px;
+    background: url(http://cbwconline.com/IMG/Codepen/Arrow-Back-Black.svg) center no-repeat;
+}
+.mobile-search .mobile-search-header .mobile-search-input {
+    color: #444;
+    font-size: 16px;
+    margin-left: 20px;
+    width: calc(100vw - 100px);
+}
+.mobile-search .mobile-search-header .mobile-search-input::-webkit-input-placeholder {
+    color: #444;
+    font-size: 16px;
+    text-align: left;
+}
+.mobile-search .mobile-search-header .mobile-search-input::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    text-align: center;
+}
+.mobile-search .mobile-search-header .mobile-search-input:-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    text-align: center;
+}
+header .profile {
+    width: 36px;
+    height: 36px;
+    background: url("https://lh3.googleusercontent.com/-UOuFk3MaIyE/AAAAAAAAAAI/AAAAAAAAAAA/AOtt-yEtASpZiUmh0TBq1JxqceBZswmVVg/s32-c-mo/photo.jpg") center/contain no-repeat;
+    border-radius: 50%;
+    margin: 0 15px;
+}
+header ul {
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+header li {
+    flex-shrink: 0;
+    list-style: none;
+    padding: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    user-select: none;
+    cursor: pointer;
+}
+header li.active {
+    color: #FFF;
+}
+header .slider {
+    height: 3px;
+    background: #FFF;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: .3s;
+}
+.side-menu {
+    justify-content: center;
+    flex-wrap: wrap;
+    background: #FFF;
+    height: 100%;
+    width: 225px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transform: translateX(-100%) translateZ(0);
+    transition: .3s;
+    overflow-y: auto;
+    will-change: transform;
+    -webkit-overflow-scrolling: touch;
+}
+.side-menu.active {
+    transform: translateX(0) translateZ(0);
+}
+.side-menu.active ~ header .menu {
+    width: 0px;
+    margin: 12px 8px;
+}
+.side-menu .menu-holder {
+  padding: 20px;
+    display: flex;
+    align-items: center;
+  background: #ddd;
+}
+.side-menu .menu-holder span {
+    color: #FF5722;
+}
+.side-menu .menu {
+    background: url(http://cbwconline.com/IMG/Codepen/Menu-Black.svg) center no-repeat;
+}
+.side-menu .menu:hover {
+    background-color: #EEE;
+}
+.side-menu li {
+  cursor: pointer;
+    list-style: none;
+    white-space: nowrap;
+    font-size: 13px;
+    color: #212121;
+    padding: 10px 0 10px 18px;
+    font-weight: 500;
+    line-height: 24px;
+    transition: .2s;
+}
+.side-menu li:hover {
+    background: #EEE;
+}
+.side-menu li.active {
+    color: #FF5722;
+    background: #F5F5F5;
+}
+.side-menu .cta {
+    display: block;
+    background: #536DFE;
+    color: #FFF;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 20px auto;
+}
+.side-menu-overlay {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s;
+}
+
+::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+}
+::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+}
+:-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+}
+@media (max-width: 1000px) {
+    .side-menu.active ~ header .header-input {
+        width: calc(50vw - 100px);
+    }
+}
+@media (max-width: 700px) {
+    .search-flex {
+        min-width: 0 !important;
+    }
+}
+@media (max-width: 767px) {
+    .side-menu.active ~ header .menu {
+        margin: 12px;
+        width: 40px;
+    }
+    .side-menu.active ~ header {
+        width: 100% !important;
+    }
+    .side-menu.active ~ header .header-input {
+        width: 50vw;
+    }
+    .side-menu.active ~ .side-menu-overlay {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+@media (max-width: 599px) {
+    .desktop-only {
+        display: none;
+    }
+    .mobile-only {
+        display: inherit;
+    }
+    .profile {
+        margin: 16px !important;
+    }
+    header .header-input {
+        display: none;
+        padding: 0px 12px;
+        font: 400 16px/18px Roboto !important;
+        width: calc(100vw - 130px);
+    }
+    .mobile-input header h1,
+    .mobile-input header .menu {
+        display: none;
+    }
+    .mobile-input input {
+        display: initial;
+    }
+}
+@media (max-width: 480px) {} .ios * {
+    cursor: pointer;
+}
+.remove {
+    position: absolute;
+    visibility: hidden;
+}
+.height {
+    height: 3000px;
+  padding: 150px 50px 50px 250px;
+}
+.height div{
+  display: none;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.height div.active{
+  display: block;
+}
+
+
+.page{
+  display: none;
+
+  padding-left: 225px
+}
+.page.active{
+  display: block;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="side-menu active">
+    <div class="menu-holder">
+        <p>Google Play <span>Music</span>
+        </p>
+    </div>
+    <ul>
+        <li>Listen Now</li>
+        <li>Top Charts</li>
+        <li>New Releases</li>
+        <li class="active">Music Library</a></li>
+        <li>Podcasts</li>
+        <li>Browse Stations</li>
+        <li>Shop</li>
+    </ul>
+</div>
+<div class="side-menu-overlay"></div>
+<div class="page-content">
+
+    <div class="page">1st page</div>
+    <div class="page">2nd page</div>
+    <div class="page">3rd page</div>
+    <div class="page active">
+
+        <header>
+            <h1>Music library</h1>
+            <input id="input" type="text" placeholder="Search" class="header-input desktop-only" />
+
+            <!--
+            <label for="input" class="search-btn mobile-only ripple"></label>
+            -->
+            <div class="search-btn mobile-only ripple"></div>
+            <div class="profile ripple"></div>
+
+            <div class="mobile-search mobile-search-hide">
+                <div class="mobile-search-header mobile-search-flex">
+                    <div ripple-color="rgba(000,000,000,.2)" class="mobile-search-back ripple"></div>
+                    <input class="mobile-search-input" placeholder="Search music" />
+                </div>
+            </div>
+
+            <ul>
+                <li class="ripple active">Playlists</li>
+                <li class="ripple">Stations</li>
+                <li class="ripple">Artists</li>
+                <li class="ripple">Albums</li>
+                <li class="ripple">Songs</li>
+                <li class="ripple">Genres</li>
+                <div class="slider"></div>
+            </ul>
+        </header>
+
+
+        <div class="height">
+            <div class="active">aaa</div>
+            <div>bbb</div>
+            <div>ccc</div>
+            <div>ddd</div>
+            <div>eee</div>
+            <div>fff</div>
+        </div>
+    </div>
+    <div class="page"></div>
+    <div class="page"></div>
+    <div class="page"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+
+</script>
+<script>
+ // $(".click").click(function() {
+ //     $("header ul").toggleClass("remove");
+ // });
+
+ function tabSlider() {
+     var $li1 = $('header li:nth-child(1)').outerWidth(),
+         $li2 = $('header li:nth-child(2)').outerWidth(),
+         $li3 = $('header li:nth-child(3)').outerWidth(),
+         $li4 = $('header li:nth-child(4)').outerWidth(),
+         $li5 = $('header li:nth-child(5)').outerWidth(),
+         $li6 = $('header li:nth-child(6)').outerWidth();
+
+     if ($('header li:nth-child(1)').hasClass('active')) {
+       $('.height div:nth-child(1)').addClass('active');
+         $('.slider').css({
+             'transform': 'translate(0, 0)',
+             'width': $li1
+         });
+     } else if ($('header li:nth-child(2)').hasClass('active')) {
+       $('.height div:nth-child(2)').addClass('active');
+         $('.slider').css({
+             'transform': 'translate(' + $li1 + 'px, 0)',
+             'width': $li2
+         });
+     } else if ($('header li:nth-child(3)').hasClass('active')) {
+       $('.height div:nth-child(3)').addClass('active');
+         $('.slider').css({
+             'transform': 'translate(' + ($li1 + $li2) + 'px, 0)',
+             'width': $li3
+         });
+     } else if ($('header li:nth-child(4)').hasClass('active')) {
+
+       $('.height div:nth-child(4)').addClass('active');
+         $('.slider').css({
+             'transform': 'translate(' + ($li1 + $li2 + $li3) + 'px, 0)',
+             'width': $li4
+         });
+     } else if ($('header li:nth-child(5)').hasClass('active')) {
+
+       $('.height div:nth-child(5)').addClass('active');
+         $('.slider').css({
+             'transform': 'translate(' + ($li1 + $li2 + $li3 + $li4) + 'px, 0)',
+             'width': $li5
+         });
+     } else if ($('header li:nth-child(6)').hasClass('active')) {
+       $('.height div:nth-child(6)').addClass('active');
+         $('.slider').css({
+             'transform': 'translate(' + ($li1 + $li2 + $li3 + $li4 + $li5) + 'px, 0)',
+             'width': $li6
+         });
+     }
+ }
+
+ function sideNavChangeContent() {
+
+     if ($('.side-menu ul li:nth-child(1)').hasClass('active')) {
+       $('.page-content .page:nth-child(1)').addClass('active');
+
+     } else if ($('.side-menu ul li:nth-child(2)').hasClass('active')) {
+       $('.page-content .page:nth-child(2)').addClass('active');
+
+     } else if ($('.side-menu ul li:nth-child(3)').hasClass('active')) {
+       $('.page-content .page:nth-child(3)').addClass('active');
+
+     } else if ($('.side-menu ul li:nth-child(4)').hasClass('active')) {
+
+       $('.page-content .page:nth-child(4)').addClass('active');
+
+     } else if ($('.side-menu ul li:nth-child(5)').hasClass('active')) {
+
+       $('.page-content .page:nth-child(5)').addClass('active');
+
+     } else if ($('.side-menu ul li:nth-child(6)').hasClass('active')) {
+       $('.page-content .page:nth-child(6)').addClass('active');
+
+     } else if ($('.side-menu ul li:nth-child(7)').hasClass('active')) {
+       $('.page-content .page:nth-child(7)').addClass('active');
+
+     }
+ }
+
+
+ function headerPadding() {
+     var $headerHeight = $('header').outerHeight();
+     $('main').css('padding-top', $headerHeight);
+ }
+
+ $(function() {
+     "use strict";
+
+     tabSlider();
+
+     // TABS
+
+     $('header li').on('click', function() {
+         $('header li').removeClass('active');
+
+         $('.height div').removeClass('active');
+         $(this).addClass('active');
+         tabSlider();
+     });
+
+
+     sideNavChangeContent();
+
+     $('.side-menu ul li').on('click', function() {
+         $('.side-menu ul li').removeClass('active');
+         $('.page').removeClass('active');
+         $(this).addClass('active');
+         sideNavChangeContent();
+     });
+
+     // CARD HEIGHT & 'MAIN' PADDING
+
+     $(window, 'main').resize(function() {
+         headerPadding();
+     }).resize();
+
+     // HEADER SHADOW
+
+     $(window).scroll(function() {
+         if ($(this).scrollTop() >= 10) {
+             $("header").addClass("shadow");
+         } else {
+             $("header").removeClass("shadow");
+         }
+     });
+
+     // MENU
+
+//      $('.menu, .side-menu-overlay').on('click', function() {
+//          var $sidebarWidth = $('.side-menu').width();
+//          $('.side-menu').toggleClass('active');
+//          if ($('.side-menu').hasClass('active')) {
+//              $('header, main').css('width', 'calc(100% - ' + $sidebarWidth + 'px)');
+//          } else {
+//              $('header, main').css('width', '100%');
+//          }
+//      });
+
+     // PROFILE MENU
+
+
+
+     // $(document).on("click", function(e) {
+     //     if (($(".account").hasClass("active")) && (!$(".account, .account *, .profile").is(e.target))) {
+     //         $(".account").toggleClass("active");
+     //     }
+     // });
+
+     // $(window).scroll(function() {
+     //     $('.account').removeClass('active');
+     // });
+
+     // MOBILE SEARCH
+
+     $('label.mobile-only').on('click', function() {
+         $(this).toggleClass('close');
+         $('body').toggleClass('mobile-input');
+     });
+
+     $(window).on('load resize', function() {
+         if ($(document).width() <= 600) {
+             $('.mobile-search-input').attr('placeholder', 'Search');
+         } else {
+             $('.mobile-search-input').attr('placeholder', 'Search Albums or Artists');
+         }
+     });
+
+     $('header .search-btn, .mobile-search-header .mobile-search-back').on('click', function() {
+         $('.mobile-search').toggleClass('searching');
+         $('.mobile-search').toggleClass('mobile-search-hide');
+     });
+
+     // RIPPLE
+
+     $(document).on('click', '.ripple', function(e) {
+
+         var $ripple = $('<span class="rippling" />'),
+             $button = $(this),
+             btnOffset = $button.offset(),
+             xPos = e.pageX - btnOffset.left,
+             yPos = e.pageY - btnOffset.top,
+             size = 0,
+             animateSize = parseInt(Math.max($button.width(), $button.height()) * Math.PI);
+
+         $ripple.css({
+                 top: yPos,
+                 left: xPos,
+                 width: size,
+                 height: size,
+                 backgroundColor: $button.attr("ripple-color"),
+                 opacity: $button.attr("ripple-opacity")
+             })
+             .appendTo($button)
+             .animate({
+                 width: animateSize,
+                 height: animateSize,
+                 opacity: 0
+             }, 500, function() {
+                 $(this).remove();
+             });
+     });
+
+     // IOS STUFF
+
+     if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+         $('body').addClass('ios');
+     }
+
+ });
+
+</script>
+</body>
+</html>

@@ -26,4 +26,9 @@ public class TestController {
 
         return new ModelAndView("file");
     }
+    @GetMapping(value = "Home")
+    public ModelAndView getWelcomePageslide3() {
+
+        return new ModelAndView("Home");
+    }
 }
